@@ -10,7 +10,7 @@ if not os.path.exists(write_path):
     os.makedirs(write_path)
 
 if timelapseconfig.symlink_latest:
-    if not os.path.exists(timelapseconfig.symlink_latest):
+    if not os.path.exists(os.path.dirname(timelapseconfig.symlink_latest)):
         os.makedirs(os.path.dirname(timelapseconfig.symlink_latest))
 
 print ("staring capture")
