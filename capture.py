@@ -26,7 +26,7 @@ while datetime.datetime.now().timestamp() < starttime + timelapseconfig.cronjob_
         print('Unable to take a capture. Returncode:', result.returncode)
     else:
         if timelapseconfig.symlink_latest:
-            if os.path.isfile(timelapseconfig.symlink_latest):
+            if os.path.islink(timelapseconfig.symlink_latest):
                 os.unlink(timelapseconfig.symlink_latest)
             os.symlink(file_name, timelapseconfig.symlink_latest)
     while datetime.datetime.now().timestamp() < cycle_starttime + timelapseconfig.delay_between_images:
