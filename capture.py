@@ -9,6 +9,10 @@ write_path = timelapseconfig.output_dir + datetime.datetime.today().strftime(tim
 if not os.path.exists(write_path):
     os.makedirs(write_path)
 
+if timelapseconfig.symlink_latest:
+    if not os.path.exists(timelapseconfig.symlink_latest):
+        os.makedirs(os.path.dirname(timelapseconfig.symlink_latest))
+
 print ("staring capture")
 starttime = datetime.datetime.now().timestamp()
 while datetime.datetime.now().timestamp() < starttime + timelapseconfig.cronjob_repeat_time:
@@ -21,9 +25,9 @@ while datetime.datetime.now().timestamp() < starttime + timelapseconfig.cronjob_
         print('Command:', ' '.join(cmd))
         print('Unable to take a capture. Returncode:', result.returncode)
     else:
-        if timelapseconfig.latest_symlink:
-            if not os.path.exists(write_path):
-                os.makedirs(os.path.dirname(timelapseconfig.latest_symlink))
-            os.symlink(file_name, timelapseconfig.latest_symlink)
+        if timelapseconfig.symlink_latest:
+            if os.path.isfile(timelapseconfig.symlink_latest):
+                os.unlink(timelapseconfig.symlink_latest)
+            os.symlink(file_name, timelapseconfig.symlink_latest)
     while datetime.datetime.now().timestamp() < cycle_starttime + timelapseconfig.delay_between_images:
         time.sleep(0.1)
