@@ -4,6 +4,7 @@ ffmpeg_cmdline = ['-y', '-rtsp_transport', 'tcp', '-i', rtsp_url, '-frames:v', '
 output_dir = '/mnt/HDD/timelapse/' # must exist, make sure to end with /
 output_dir_for_daily_timelapse_videos = '/mnt/HDD/timelapse/daily/' # must exist, make sure to end with /
 output_dir_for_monthly_timelapse_videos = '/mnt/HDD/timelapse/monthly/' # must exist, make sure to end with /
+latest_symlink = '' # if defined the latest captured image is symlinked to this file. The path must exist.
 delay_between_images = 60 # in seconds
 cronjob_repeat_time = 600 # in seconds
 keep_every_nth_picture = 10 # after a daily video is created, delete all but the n-th picture

@@ -20,5 +20,10 @@ while datetime.datetime.now().timestamp() < starttime + timelapseconfig.cronjob_
     if result.returncode != 0:
         print('Command:', ' '.join(cmd))
         print('Unable to take a capture. Returncode:', result.returncode)
+    else:
+        if timelapseconfig.latest_symlink:
+            if not os.path.exists(write_path):
+                os.makedirs(os.path.dirname(timelapseconfig.latest_symlink))
+            os.symlink(file_name, timelapseconfig.latest_symlink)
     while datetime.datetime.now().timestamp() < cycle_starttime + timelapseconfig.delay_between_images:
         time.sleep(0.1)
