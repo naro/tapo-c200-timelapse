@@ -1,4 +1,6 @@
 rtsp_url = 'rtsp://user:pass@192.168.1.10:554/stream1'
+ffmpeg = 'ffmpeg'
+ffmpeg_cmdline = ['-y', '-rtsp_transport', 'tcp', '-i', rtsp_url, '-frames:v', '1']
 output_dir = '/mnt/HDD/timelapse/' # must exist, make sure to end with /
 output_dir_for_daily_timelapse_videos = '/mnt/HDD/timelapse/daily/' # must exist, make sure to end with /
 output_dir_for_monthly_timelapse_videos = '/mnt/HDD/timelapse/monthly/' # must exist, make sure to end with /
