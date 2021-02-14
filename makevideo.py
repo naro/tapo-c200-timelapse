@@ -12,3 +12,8 @@ n = str(int(timelapseconfig.keep_every_nth_picture))
 
 if returnval == 0: #if making the video was successful, delete the files
     os.system("for file in `find " + yesterdays_folder + " -type f | awk 'NR %" + n + " != 0'`; do rm $file ; done")
+
+if timelapseconfig.symlink_latest_daily_dirname:
+    if not os.path.isdir(timelapseconfig.symlink_latest_daily_dirname):
+        os.makedirs(timelapseconfig.symlink_latest_daily_dirname)
+    os.symlink(output_video_path, timelapseconfig.symlink_latest_daily_dirname)
